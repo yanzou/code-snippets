@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>scroll position demo</title>
+  <style>
+    .parent {
+      max-height: 150px;
+      overflow-y: scroll;
+      display: block;
+      border: 2px dashed black;
+    }
+
+    .child {
+      border: 1px solid blue;
+    }
+    .chiild {
+      border: 1px solid red;
+    }
+
+    .blinking {
+      animation: blinkingText 1.2s infinite;
+    }
+
+    @keyframes blinkingText {
+      0% { background-color: #00CC00; }
+      20% { background-color: transparent; }
+      40% { background-color: #00CC00; }
+      60% { background-color: transparent; }
+      80% { background-color: #00CC00; }
+      90% { background-color: transparent; }
+      100% { background-color: #00CC00; }
+    }
+
+  </style>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+
+<div>other div</div>
+<div>other div</div>
+<div>other div</div>
+<div>other div</div>
+<div>other div</div>
+<div class="parent">
+  <p class="chiild" onclick="scrollToTop($(this))">Hello 1</p>
+  <p class="child" onclick="scrollToTop($(this))">Hello 3</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello 4</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello 5</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello 7</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello aaaaa</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello bbbb</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello cccc</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello dddd</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello eeee</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello fffff</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello gggg</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello hhhh</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello iiii</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello jjjj</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello kkkk</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello llll</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello xxxxxxs</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello yyyyy</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello 2sadfas</p>
+  <p class="chiild" onclick="scrollToTop($(this))">Hello 2sadfas</p>
+
+  <p class="chiild">Hello1</p>
+  <p class="chiild">Hello1  8989898</p>
+  <p class="chiild">Hello1</p>
+  <p class="chiild">Hello1</p>
+
+</div>
+<p id="result"></p>
+<p id="result1"></p>
+
+<script>
+
+  var $parent = $('.parent');
+  var $target = $('.child').first();
+
+  onClick = function() {
+    var position = $target.position();
+    var positionParent = $parent.position();
+
+    $('#result').text('child - left: ' + position.left + ', top: ' + position.top);
+    $('#result1').text('parent - left: ' + positionParent.left + ', top: ' + positionParent.top + ', scrollTop: ' + $parent.scrollTop());
+  };
+
+  scrollToTop = function ($element) {
+    var $el = $element || $target;
+
+    var parentScrollTop = $parent.scrollTop();
+    var top = $el.position().top;
+    var parentTop = $parent.position().top;
+
+    $parent.scrollTop(parentScrollTop + (top - parentTop));
+
+    $el.addClass('blinking');
+
+    setTimeout(function () {
+      $el.removeClass('blinking');
+    }, 2000)
+  };
+</script>
+
+<div>
+  <input type="button" onclick="onClick()" value="view position" />
+  <input type="button" onclick="scrollToTop()" value="scroll To Top" />
+</div>
+
+</body>
+</html>
