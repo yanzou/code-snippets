@@ -32,6 +32,21 @@
       100% { background-color: #00CC00; }
     }
 
+    .blinking-bg {
+      animation: blinkingBg 1s infinite;
+    }
+
+    @keyframes blinkingBg {
+      0% { background-color: #008C00; }
+      20% { background-color: #00be1f; }
+      40% { background-color: #31d22d; }
+      50% { background-color: #30d935; }
+      60% { background-color: #5ddf51; }
+      80% { background-color: #64d55f; }
+      90% { background-color: #adf1ab; }
+      100% { background-color: @compute-group-background }
+    }
+
   </style>
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
@@ -94,12 +109,13 @@
     var top = $el.position().top;
     var parentTop = $parent.position().top;
 
-    $parent.scrollTop(parentScrollTop + (top - parentTop));
+    // $parent.scrollTop(parentScrollTop + (top - parentTop));
+    $parent.animate({ scrollTop: parentScrollTop + (top - parentTop) }, 500);
 
-    $el.addClass('blinking');
+    $el.addClass('blinking-bg');
 
     setTimeout(function () {
-      $el.removeClass('blinking');
+      $el.removeClass('blinking-bg');
     }, 2000)
   };
 </script>
